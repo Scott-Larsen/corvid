@@ -95,7 +95,7 @@ def _listen(input, output, templates, port, bind, on_modified):
         host, port = httpd.socket.getsockname()[:2]
         url_host = f"[{host}]" if ":" in host else host
         click.echo(
-            f"Serving HTTP on {host} port {port} " f"(http://{url_host}:{port}/) ..."
+            f"Serving HTTP on {host} port {port} (http://{url_host}:{port}/ - Press CTRL+C to quit)"
         )
         try:
             while True:
@@ -109,12 +109,12 @@ def _listen(input, output, templates, port, bind, on_modified):
 
 
 @click.command()
-@click.option("-l", "--listen", is_flag=True, help='Enable live reloading')
-@click.option("-b", "--bind", default="0.0.0.0", help='Host to bind to')
-@click.option("-p", "--port", default=8000, help='Port to run on ')
-@click.option("-i", "--input", default="input", help='Input directory')
-@click.option("-o", "--output", default="output", help='Output directory')
-@click.option("-t", "--templates", default="templates", help='Templates directory')
+@click.option("-l", "--listen", is_flag=True, help="Enable live reloading")
+@click.option("-b", "--bind", default="0.0.0.0", help="Host to bind to")
+@click.option("-p", "--port", default=8000, help="Port to run on ")
+@click.option("-i", "--input", default="input", help="Input directory")
+@click.option("-o", "--output", default="output", help="Output directory")
+@click.option("-t", "--templates", default="templates", help="Templates directory")
 def cli(listen, port, bind, input, output, templates):
     # Make a build callable
     build = lambda: _build(input, output, templates)
